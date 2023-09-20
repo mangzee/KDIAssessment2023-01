@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: E-Commerce API
+  version: 1.0.0
+  description: API for managing products in an e-commerce system.
+servers:
+  - url: https://api.example.com/v1
+    description: .NET assessment
+paths:
+  /products:
+    get:
+      summary: Get a list of products
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              example:
+                products: []
+    post:
+      summary: Create a new product
+      requestBody:
+        description: Product object to be added
+        required: true
+        content:
+          application/json:
+            example:
+              name: Product Name
+              description: Product Description
+              price: 29.99
+              stockQuantity: 100
+      responses:
+        '201':
+          description: Product created successfully
+  /products/{productId}:
+    get:
+      summary: Get product details by ID
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the product
+      responses:
+        '200':
+          description: Product details
+          content:
+            application/json:
+              example:
+                productId: 1
+                name: Product Name
+                description: Product Description
+                price: 29.99
+                stockQuantity: 100
+        '404':
+          description: Product not found
+    put:
+      summary: Update product details by ID
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the product
+      requestBody:
+        description: Updated product object
+        required: true
+        content:
+          application/json:
+            example:
+              name: Updated Product Name
+              description: Updated Product Description
+              price: 34.99
+              stockQuantity: 90
+      responses:
+        '200':
+          description: Product updated successfully
+        '404':
+          description: Product not found
+    delete:
+      summary: Delete product by ID
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the product
+      responses:
+        '204':
+          description: Product deleted successfully
+        '404':
+          description: Product not found
